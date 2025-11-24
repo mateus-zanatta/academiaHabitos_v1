@@ -49,7 +49,7 @@ function Login() {
         <h1 style={{'marginTop': 0, 'textAlign': 'center'}}>Login</h1>
         <form onSubmit={handleSubmit(fazerLogin)}>
           <p>
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email" className="bg-red-500 p-10">Email:</label>
             <input type="email" id="email" required
               className='campos larguraG' 
               {...register("email")}/>
