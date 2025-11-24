@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import Titulo from './components/Titulo'
-import './Auth.css'
 
 function SelecaoPerfil() {
   const [usuario, setUsuario] = useState(null)
@@ -50,38 +49,48 @@ function SelecaoPerfil() {
 
   return (
     <>
-      <Titulo />
-      <div className='auth-container'>
-        <h1 style={{'marginTop': 0, 'textAlign': 'center'}}>Olá, {usuario.nome}! 👋</h1>
-        <p style={{'textAlign': 'center', 'marginBottom': '2rem'}}>Como você gostaria de acessar?</p>
+     <Titulo />
+      <div className="max-w-md mx-auto my-12 p-10 bg-white rounded-3xl shadow-2xl border border-gray-100">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">Olá, {usuario?.nome}! 👋</h1>
+        <p className="text-center text-gray-500 mb-8">Como você gostaria de acessar?</p>
         
-        <div className="perfil-options">
-          <div className="perfil-option">
-            <h3>👨‍👩‍👧‍👦 Área dos Pais</h3>
-            <p>Crie trilhas e acompanhe o progresso</p>
-            <button onClick={handlePerfilPai} className='btn submit'>
+        <div className="space-y-8">
+          {/* Opção Pai */}
+          <div className="bg-gray-50 p-6 rounded-2xl text-center border-2 border-transparent hover:border-[#667eea] hover:-translate-y-1 transition-all">
+            <h3 className="text-xl font-bold text-gray-800 mb-2">👨‍👩‍👧‍👦 Área dos Pais</h3>
+            <p className="text-gray-500 mb-6 text-sm">Crie trilhas e acompanhe o progresso</p>
+            <button 
+              onClick={handlePerfilPai} 
+              className="w-full py-3 bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
+            >
               Acessar como Responsável
             </button>
           </div>
 
-          <div className="perfil-divider">
-            <span>ou</span>
+          <div className="relative text-center">
+            <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200"></div></div>
+            <span className="relative bg-white px-4 text-gray-500 font-bold">ou</span>
           </div>
 
-          <div className="perfil-option">
-            <h3>🎮 Área das Crianças</h3>
-            <p>Complete missões e ganhe pontos</p>
-            <div className="token-input">
+          {/* Opção Criança */}
+          <div className="bg-gray-50 p-6 rounded-2xl text-center border-2 border-transparent hover:border-[#667eea] hover:-translate-y-1 transition-all">
+            <h3 className="text-xl font-bold text-gray-800 mb-2">🎮 Área das Crianças</h3>
+            <p className="text-gray-500 mb-6 text-sm">Complete missões e ganhe pontos</p>
+            
+            <div className="mb-4">
               <input 
                 type="text" 
-                placeholder="Digite seu token de 4 dígitos"
+                placeholder="TOKEN"
                 value={tokenCrianca}
                 onChange={(e) => setTokenCrianca(e.target.value)}
                 maxLength="4"
-                className="campos"
+                className="w-full text-center text-2xl font-bold tracking-[0.5em] p-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:border-[#667eea] transition-all uppercase"
               />
             </div>
-            <button onClick={handlePerfilCrianca} className='btn submit'>
+            <button 
+              onClick={handlePerfilCrianca} 
+              className="w-full py-3 bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all"
+            >
               Acessar como Criança
             </button>
           </div>

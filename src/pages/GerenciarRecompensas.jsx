@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import Titulo from '../components/Titulo'
-import './Pages.css'
 
 function GerenciarRecompensas() {
   const { register, handleSubmit, reset } = useForm()
@@ -105,116 +104,144 @@ function GerenciarRecompensas() {
   return (
     <>
       <Titulo />
-      <div className="page-container">
-        <div className="page-header">
-          <h1>🎁 Gerenciar Recompensas</h1>
-          <p>Crie recompensas que suas crianças podem resgatar com os pontos</p>
+      <div className="max-w-[1200px] mx-auto p-4 md:p-8">
+        <div className="text-center mb-12 bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white p-8 rounded-3xl shadow-xl">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">🎁 Gerenciar Recompensas</h1>
+          <p className="text-lg opacity-90">Crie recompensas que suas crianças podem resgatar com os pontos</p>
         </div>
 
-        <div className="content-grid">
-          <div className="form-section">
-            <h3>➕ Criar Nova Recompensa</h3>
-            <form onSubmit={handleSubmit(criarRecompensa)} className="styled-form">
-              <div className="form-group">
-                <label>Título da Recompensa:</label>
-                <input 
-                  type="text" 
-                  required 
-                  {...register('titulo')}
-                  placeholder="Ex: Passeio no Parque, Sorvete, etc."
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Descrição:</label>
-                <textarea 
-                  {...register('descricao')}
-                  placeholder="Descreva a recompensa..."
-                  rows="3"
-                />
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Pontos Necessários:</label>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Coluna da Esquerda: Formulário */}
+          <div className="lg:col-span-1">
+            <div className="bg-white p-6 rounded-3xl shadow-lg border border-gray-100 sticky top-24">
+              <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                ➕ Criar Nova Recompensa
+              </h3>
+              <form onSubmit={handleSubmit(criarRecompensa)} className="space-y-5">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Título:</label>
                   <input 
-                    type="number" 
+                    type="text" 
                     required 
-                    min="1"
-                    {...register('pontos')}
-                    placeholder="Ex: 100"
+                    {...register('titulo')}
+                    placeholder="Ex: Passeio no Parque"
+                    className="w-full p-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:border-[#667eea]"
                   />
                 </div>
 
-                <div className="form-group">
-                  <label>Ícone:</label>
-                  <select {...register('icone')} defaultValue="🎁">
-                    <option value="🎁">Presente</option>
-                    <option value="🍦">Sorvete</option>
-                    <option value="🎮">Video-game</option>
-                    <option value="🎬">Cinema</option>
-                    <option value="🏆">Troféu</option>
-                    <option value="⭐">Estrela</option>
-                    <option value="🎪">Parque</option>
-                    <option value="📚">Livro</option>
-                  </select>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Descrição:</label>
+                  <textarea 
+                    {...register('descricao')}
+                    placeholder="Detalhes..."
+                    rows="3"
+                    className="w-full p-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:border-[#667eea] resize-none"
+                  />
                 </div>
-              </div>
 
-              <div className="form-group">
-                <label>Para qual criança? (Opcional)</label>
-                <select {...register('criancaId')}>
-                  <option value="">Todas as crianças</option>
-                  {criancas.map(crianca => (
-                    <option key={crianca.id} value={crianca.id}>
-                      {crianca.avatar} {crianca.nome}
-                    </option>
-                  ))}
-                </select>
-                <small>Deixe em branco para disponibilizar para todas as crianças</small>
-              </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">Pontos:</label>
+                    <input 
+                      type="number" 
+                      required 
+                      min="1"
+                      {...register('pontos')}
+                      placeholder="100"
+                      className="w-full p-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:border-[#667eea]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">Ícone:</label>
+                    <select 
+                      {...register('icone')} 
+                      defaultValue="🎁"
+                      className="w-full p-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:border-[#667eea]"
+                    >
+                      <option value="🎁">Presente</option>
+                      <option value="🍦">Sorvete</option>
+                      <option value="🎮">Game</option>
+                      <option value="🎬">Cinema</option>
+                      <option value="🏆">Troféu</option>
+                      <option value="🎪">Parque</option>
+                    </select>
+                  </div>
+                </div>
 
-              <button type="submit" className="btn-submit">
-                🎯 Criar Recompensa
-              </button>
-            </form>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Para quem? (Opcional)</label>
+                  <select 
+                    {...register('criancaId')}
+                    className="w-full p-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:border-[#667eea]"
+                  >
+                    <option value="">Todas as crianças</option>
+                    {criancas.map(crianca => (
+                      <option key={crianca.id} value={crianca.id}>
+                        {crianca.avatar} {crianca.nome}
+                      </option>
+                    ))}
+                  </select>
+                  <small className="text-gray-400 text-xs block mt-1">Deixe em branco para todos</small>
+                </div>
+
+                <button type="submit" className="w-full py-3 bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white font-bold rounded-xl shadow-md hover:-translate-y-1 transition-all">
+                  🎯 Criar Recompensa
+                </button>
+              </form>
+            </div>
           </div>
 
-          <div className="list-section">
-            <h3>📋 Recompensas Cadastradas</h3>
+          {/* Coluna da Direita: Lista */}
+          <div className="lg:col-span-2">
+            <h3 className="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-[#667eea] pl-4">
+              📋 Recompensas Cadastradas
+            </h3>
             
             {recompensas.length === 0 ? (
-              <div className="empty-state">
-                <div className="empty-emoji">🎁</div>
-                <h4>Nenhuma recompensa criada</h4>
-                <p>Crie sua primeira recompensa para motivar suas crianças!</p>
+              <div className="text-center p-12 bg-white rounded-3xl border-2 border-dashed border-gray-200">
+                <div className="text-6xl mb-4 grayscale opacity-50">🎁</div>
+                <h4 className="text-xl font-bold text-gray-600 mb-2">Nenhuma recompensa criada</h4>
+                <p className="text-gray-400">Crie sua primeira recompensa para motivar suas crianças!</p>
               </div>
             ) : (
-              <div className="recompensas-grid">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {recompensas.map(recompensa => (
-                  <div key={recompensa.id} className={`recompensa-card ${recompensa.ativa ? 'ativa' : 'inativa'}`}>
-                    <div className="recompensa-header">
-                      <span className="recompensa-icone">{recompensa.icone}</span>
-                      <div className="recompensa-info">
-                        <h4>{recompensa.titulo}</h4>
-                        <p>{recompensa.descricao}</p>
-                        <div className="recompensa-detalhes">
-                          <span className="pontos-recompensa">⭐ {recompensa.pontos} pontos</span>
-                          <span className="crianca-alvo">👶 {getCriancaNome(recompensa.criancaId)}</span>
+                  <div 
+                    key={recompensa.id} 
+                    className={`bg-white p-6 rounded-2xl shadow-md border-2 transition-all hover:shadow-xl ${recompensa.ativa ? 'border-transparent' : 'border-gray-200 opacity-75'}`}
+                  >
+                    <div className="flex gap-4 mb-4">
+                      <span className="text-4xl bg-gray-50 p-3 rounded-xl h-fit">{recompensa.icone}</span>
+                      <div className="flex-1">
+                        <h4 className="text-xl font-bold text-gray-800 mb-1">{recompensa.titulo}</h4>
+                        <p className="text-gray-500 text-sm mb-3 line-clamp-2">{recompensa.descricao}</p>
+                        <div className="flex flex-wrap gap-2">
+                          <span className="bg-[#667eea]/10 text-[#667eea] px-3 py-1 rounded-md text-xs font-bold">
+                            ⭐ {recompensa.pontos} pontos
+                          </span>
+                          <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-md text-xs font-bold">
+                            👶 {getCriancaNome(recompensa.criancaId) || 'Todos'}
+                          </span>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="recompensa-actions">
+                    <div className="flex gap-2 pt-4 border-t border-gray-100">
                       <button 
                         onClick={() => toggleRecompensa(recompensa.id, recompensa.ativa)}
-                        className={`btn-status ${recompensa.ativa ? 'ativa' : 'inativa'}`}
+                        className={`flex-1 py-2 rounded-lg font-bold text-sm transition-colors ${
+                          recompensa.ativa 
+                            ? 'bg-green-100 text-green-700 hover:bg-green-200' 
+                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                        }`}
                       >
                         {recompensa.ativa ? '✅ Ativa' : '❌ Inativa'}
                       </button>
                       <button 
                         onClick={() => excluirRecompensa(recompensa.id)}
-                        className="btn-excluir"
+                        className="px-4 py-2 bg-red-50 text-red-500 rounded-lg hover:bg-red-100 transition-colors"
+                        title="Excluir"
                       >
                         🗑️
                       </button>

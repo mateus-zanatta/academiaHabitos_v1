@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form"
-import './Auth.css'
 import Titulo from './components/Titulo'
 import { useEffect } from "react"
 
@@ -45,23 +44,45 @@ function Login() {
   return (
     <>
       <Titulo />
-      <div className='auth-container'>
-        <h1 style={{'marginTop': 0, 'textAlign': 'center'}}>Login</h1>
-        <form onSubmit={handleSubmit(fazerLogin)}>
-          <p>
-            <label htmlFor="email" className="bg-red-500 p-10">Email:</label>
-            <input type="email" id="email" required
-              className='campos larguraG' 
-              {...register("email")}/>
-          </p>
-          <p>
-            <label htmlFor="senha">Senha:</label>
-            <input type="password" id="senha" required
-              className='campos larguraG'
-              {...register("senha")} />
-          </p>
-          <input type="submit" value="Entrar" className='btn submit' />
-          <a href="/registro" className='btn reset' style={{marginLeft: '20px'}}>Criar Conta</a>
+      <div className="max-w-md mx-auto my-12 p-10 bg-white rounded-3xl shadow-2xl border border-gray-100">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">Login</h1>
+        
+        <form onSubmit={handleSubmit(fazerLogin)} className="space-y-6 mt-8">
+          <div>
+            <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2">Email:</label>
+            <input 
+              type="email" 
+              id="email" 
+              required
+              className="w-full p-4 rounded-xl border-2 border-gray-200 bg-gray-50 focus:outline-none focus:border-[#667eea] focus:ring-4 focus:ring-[#667eea]/10 transition-all" 
+              {...register("email")}
+            />
+          </div>
+          
+          <div>
+            <label htmlFor="senha" className="block text-sm font-bold text-gray-700 mb-2">Senha:</label>
+            <input 
+              type="password" 
+              id="senha" 
+              required
+              className="w-full p-4 rounded-xl border-2 border-gray-200 bg-gray-50 focus:outline-none focus:border-[#667eea] focus:ring-4 focus:ring-[#667eea]/10 transition-all"
+              {...register("senha")} 
+            />
+          </div>
+
+          <div className="flex flex-col gap-3 pt-4">
+            <input 
+              type="submit" 
+              value="Entrar" 
+              className="w-full py-4 bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white font-bold rounded-xl cursor-pointer shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all" 
+            />
+            <a 
+              href="/registro" 
+              className="w-full py-4 text-center bg-gray-500 text-white font-bold rounded-xl hover:bg-gray-600 hover:-translate-y-1 transition-all"
+            >
+              Criar Conta
+            </a>
+          </div>
         </form>
       </div>
     </>

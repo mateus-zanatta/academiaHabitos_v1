@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import Titulo from '../components/Titulo'
-import './Pages.css'
 
 function CadastroCrianca() {
   const { register, handleSubmit, reset } = useForm()
@@ -47,26 +46,31 @@ function CadastroCrianca() {
   return (
     <>
       <Titulo />
-      <div className="page-container">
-        <div className="page-header">
-          <h1>👶 Cadastrar Nova Criança</h1>
-          <p>Adicione uma criança para começar a usar o sistema</p>
+      <div className="max-w-[1200px] mx-auto p-4 md:p-8">
+        
+        {/* Header */}
+        <div className="text-center mb-12 bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white p-8 rounded-3xl shadow-xl">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">👶 Cadastrar Nova Criança</h1>
+          <p className="text-lg opacity-90">Adicione uma criança para começar a usar o sistema</p>
         </div>
 
-        <div className="form-container">
-          <form onSubmit={handleSubmit(cadastrarCrianca)} className="styled-form">
-            <div className="form-group">
-              <label>Nome da Criança:</label>
+        {/* Form Container */}
+        <div className="max-w-3xl mx-auto">
+          <form onSubmit={handleSubmit(cadastrarCrianca)} className="bg-white p-8 rounded-3xl shadow-lg mb-12 border border-gray-100">
+            
+            <div className="mb-6">
+              <label className="block text-sm font-bold text-gray-700 mb-2">Nome da Criança:</label>
               <input 
                 type="text" 
                 required 
                 {...register('nome')}
                 placeholder="Digite o nome da criança"
+                className="w-full p-4 rounded-xl border-2 border-gray-200 bg-gray-50 focus:outline-none focus:border-[#667eea] focus:ring-4 focus:ring-[#667eea]/10 transition-all"
               />
             </div>
 
-            <div className="form-group">
-              <label>Idade:</label>
+            <div className="mb-6">
+              <label className="block text-sm font-bold text-gray-700 mb-2">Idade:</label>
               <input 
                 type="number" 
                 min="3" 
@@ -74,12 +78,17 @@ function CadastroCrianca() {
                 required 
                 {...register('idade')}
                 placeholder="Idade entre 3 e 12 anos"
+                className="w-full p-4 rounded-xl border-2 border-gray-200 bg-gray-50 focus:outline-none focus:border-[#667eea] focus:ring-4 focus:ring-[#667eea]/10 transition-all"
               />
             </div>
 
-            <div className="form-group">
-              <label>Avatar:</label>
-              <select {...register('avatar')} defaultValue="👶">
+            <div className="mb-8">
+              <label className="block text-sm font-bold text-gray-700 mb-2">Avatar:</label>
+              <select 
+                {...register('avatar')} 
+                defaultValue="👶"
+                className="w-full p-4 rounded-xl border-2 border-gray-200 bg-gray-50 focus:outline-none focus:border-[#667eea] focus:ring-4 focus:ring-[#667eea]/10 transition-all cursor-pointer"
+              >
                 <option value="👶">Bebê</option>
                 <option value="👦">Menino</option>
                 <option value="👧">Menina</option>
@@ -90,29 +99,34 @@ function CadastroCrianca() {
               </select>
             </div>
 
-            <button type="submit" className="btn-submit">
+            <button type="submit" className="w-full py-4 bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white font-bold rounded-xl shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all">
               🎯 Cadastrar Criança
             </button>
           </form>
-        </div>
 
-        {criancas.length > 0 && (
-          <div className="criancas-list">
-            <h3>🎪 Crianças Cadastradas</h3>
-            <div className="criancas-grid">
-              {criancas.map(crianca => (
-                <div key={crianca.id} className="crianca-card">
-                  <div className="crianca-avatar">{crianca.avatar}</div>
-                  <div className="crianca-info">
-                    <h4>{crianca.nome}</h4>
-                    <p>{crianca.idade} anos</p>
-                    <p className="crianca-token">Token: {crianca.token}</p>
+          {/* Lista de Crianças */}
+          {criancas.length > 0 && (
+            <div className="mt-12">
+              <h3 className="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-[#667eea] pl-4">
+                🎪 Crianças Cadastradas
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {criancas.map(crianca => (
+                  <div key={crianca.id} className="bg-white p-6 rounded-2xl shadow-md border-2 border-transparent hover:border-[#667eea] hover:-translate-y-1 transition-all flex items-center gap-4 cursor-default">
+                    <div className="text-5xl">{crianca.avatar}</div>
+                    <div>
+                      <h4 className="text-xl font-bold text-gray-800">{crianca.nome}</h4>
+                      <p className="text-gray-500 mb-2">{crianca.idade} anos</p>
+                      <span className="inline-block bg-[#667eea] text-white px-3 py-1 rounded-md text-sm font-bold tracking-wider">
+                        Token: {crianca.token}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   )
