@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react'
-import Titulo from '../components/Titulo'
+import Titulo from '../components/Titulo.jsx'
 import CardTarefa from '../components/CardTarefa'
 import './Pages.css'
 
